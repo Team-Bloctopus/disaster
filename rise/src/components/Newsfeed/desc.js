@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState, useEffect }from 'react';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { FaTshirt, FaUser } from 'react-icons/fa';
 import Sidebar from "../SideBar";
@@ -6,16 +6,31 @@ import Navbar from "../Navbar/navbar"
 import boLogo from "../styles/assets/logo.svg";
 import Rise from "../styles/assets/Rise.svg";
 import "../styles/home.css";
-
+import { useStateContext } from '../../context';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 const NewsPage= () => {
-  const description =
-    "News Description...... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget risus dui. Integer et elit leo. Nam pharetra eleifend tortor ac bibendum. Sed at commodo lectus. Fusce euismod mauris mauris, vel scelerisque sem laoreet non. Nulla facilisi. Suspendisse vulputate mauris eu nibh commodo, non viverra mauris tempus. Maecenas ut felis lorem. Duis a gravida risus. Vestibulum in consectetur nulla, nec interdum sem. Fusce sodales felis mauris, et efficitur justo semper vel. Quisque aliquet purus eu sem fermentum, et pulvinar tellus pharetra. Aliquam eu nisl nisi. Integer nec quam tellus. Proin lobortis congue feugiat.";
-
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const { donateDisaster, address} = useStateContext();
+  const [amount, setAmount] = useState('');
+  const [donators, setDonators] = useState([]);
+  // const description =
+  //   "News Description...... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget risus dui. Integer et elit leo. Nam pharetra eleifend tortor ac bibendum. Sed at commodo lectus. Fusce euismod mauris mauris, vel scelerisque sem laoreet non. Nulla facilisi. Suspendisse vulputate mauris eu nibh commodo, non viverra mauris tempus. Maecenas ut felis lorem. Duis a gravida risus. Vestibulum in consectetur nulla, nec interdum sem. Fusce sodales felis mauris, et efficitur justo semper vel. Quisque aliquet purus eu sem fermentum, et pulvinar tellus pharetra. Aliquam eu nisl nisi. Integer nec quam tellus. Proin lobortis congue feugiat.";
+  const [isLoading, setIsLoading] = useState(false);
   const categories = [
     { name: "Food", icon: <IoFastFoodOutline />, count: 10 },
     { name: "Clothes", icon: <FaTshirt />, count: 5 },
     { name: "Volunteers", icon: <FaUser />, count: 3 },
   ];
+  const handleDonate = async () => {
+    console.log("asdfdfas;");
+    setIsLoading(true);
+
+    //await upVoteCall(state.pId,);
+    await donateDisaster(state.pId, amount);
+    //navigate('/');
+    setIsLoading(false);
+  };
 
   return (
     <div
@@ -28,8 +43,8 @@ const NewsPage= () => {
       }}
     >
       <header>
-        <h1 style={{ textAlign: 'center', fontSize: '3rem' }}>NEWS TITLE HERE.</h1>
-        <p style={{ fontSize: '2rem' ,padding: '3%'}}>{description}</p>
+        <h1 style={{ textAlign: 'center', fontSize: '3rem' }}>{state?.name}</h1>
+        <p style={{ fontSize: '2rem' ,padding: '3%'}}>{state?.description}</p>
         <div
           style={{
             marginTop: 'auto',
@@ -55,6 +70,8 @@ const NewsPage= () => {
             <p style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>Fund:</p>
             <input
               type="text"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
               style={{
                 padding: '0.5rem',
                 marginBottom: '0.5rem',
@@ -66,6 +83,7 @@ const NewsPage= () => {
               placeholder="Enter amount"
             />
               <button
+               onClick={handleDonate}
                 style={{
                   padding: '0.75rem 1.5rem',
                   fontSize: '1rem',

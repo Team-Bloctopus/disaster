@@ -4,12 +4,15 @@
     background-color: rgba(97, 99, 99, 0.436);
     border: 1px solid black;
     border-radius: 40px;
+    margin-top: 200px;
     margin-bottom: 0.2rem;
+   
 }
 .content
-{
+{   
     padding-left:5px;
-    width:max-content;
+    width:fit-content;
+    
     height: fit-content;
 }
 
@@ -20,8 +23,10 @@
     text-align: left; 
 }
 .feed img {
-   
-    padding:5px
+    border-radius: 20px;
+    padding:5px;
+    width: 350px;
+    height: 250px;
 }
 .feed h1 {
    

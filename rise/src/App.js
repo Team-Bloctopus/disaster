@@ -15,7 +15,7 @@ function App() {
       <Route exact path="/" element={< Splash/>} />
       <Route path="/landing"  element={<Landing />} />
       <Route path="/home"  element={<Home />} />
-      <Route path="/home/desc"  element={<Description />} />
+      <Route path="/home/desc/:id"  element={<Description />} />
       <Route path="/Newsfeed/newsfeed"  element={<News/>} />
       <Route path="/Report/Report"  element={<Repo/>} />
       <Route path="/volunteering/form"  element={<Vol/>} />

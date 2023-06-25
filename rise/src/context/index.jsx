@@ -175,8 +175,15 @@ const updatePublic= async (_id) => {
    // const data = await contract.call("transfer", [address, amount])
     return data;
   };
-
-
+const donateDisaster = async (  id, amount) => {
+  try {
+    //const data = await donateToDisaster({ args: [_id, amount] });
+    const data = contract.call('donateToDisaster', [id, amount]);
+    console.info("contract call successs", data);
+  } catch (err) {
+    console.error("contract call failure", err);
+  }
+}
   const getDonations = async (pId) => {
     const donations = await contract.call('getDonators', pId);
     const numberOfDonations = donations[0].length;
@@ -204,6 +211,7 @@ const verifyVolunteer = async(_id,_name) => {
         address,
         contract,
         connect,
+        donateDisaster,
        // createCampaign: publishCampaign,
         getDisasters,
         publishPost,
