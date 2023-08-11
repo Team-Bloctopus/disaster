@@ -33,7 +33,7 @@ const Newsfeed = () =>
           const handleNavigate = (post) => {
           
             navigate( `./desc/${post?.name}`, { state: post })
-            console.log(post)
+            console.log(post) 
             //navigate(`/post-details/${post.title}`, { state: post });
           };
 
